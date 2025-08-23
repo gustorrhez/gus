@@ -1,0 +1,1100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IA para TikTok, Instagram y Blog - Guía Completa</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 40px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .platform-selector {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .platform-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 24px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            backdrop-filter: blur(10px);
+        }
+
+        .platform-btn:hover,
+        .platform-btn.active {
+            background: rgba(255, 255, 255, 0.9);
+            color: #667eea;
+            border-color: white;
+            transform: translateY(-2px);
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .ai-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            opacity: 1;
+        }
+
+        .ai-card.hidden {
+            opacity: 0.3;
+            transform: scale(0.95);
+            pointer-events: none;
+        }
+
+        .ai-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.2);
+        }
+
+        .ai-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--accent-color);
+        }
+
+        .chatgpt { --accent-color: linear-gradient(90deg, #00d4aa, #00c896); }
+        .claude { --accent-color: linear-gradient(90deg, #f59e0b, #d97706); }
+        .gemini { --accent-color: linear-gradient(90deg, #4285f4, #0f9d58); }
+        .deepseek { --accent-color: linear-gradient(90deg, #8b5cf6, #a855f7); }
+        .grok { --accent-color: linear-gradient(90deg, #43e97b, #38f9d7); }
+        .minimax { --accent-color: linear-gradient(90deg, #fa709a, #fee140); }
+        .kimi { --accent-color: linear-gradient(90deg, #4facfe, #00f2fe); }
+        .qwen { --accent-color: linear-gradient(90deg, #ff9a56, #ff6b6b); }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .ai-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: var(--accent-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 12px;
+            font-size: 16px;
+            color: white;
+            font-weight: bold;
+        }
+
+        .ai-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2d3748;
+        }
+
+        .ai-subtitle {
+            color: #718096;
+            font-size: 0.8rem;
+        }
+
+        .platform-badges {
+            display: flex;
+            gap: 8px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: white;
+        }
+
+        .badge.tiktok {
+            background: linear-gradient(45deg, #ff0050, #fe2d5a);
+        }
+
+        .badge.instagram {
+            background: linear-gradient(45deg, #833ab4, #fd1d1d, #fcb045);
+        }
+
+        .badge.blog {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+        }
+
+        .price-tag {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            text-align: center;
+            margin: 12px 0;
+            font-size: 0.9rem;
+        }
+
+        .content-examples {
+            background: #f7fafc;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+
+        .content-examples h4 {
+            color: #2d3748;
+            margin-bottom: 12px;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .content-section {
+            margin-bottom: 15px;
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        .example-item {
+            background: white;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .example-title {
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 4px;
+            font-size: 0.85rem;
+        }
+
+        .example-description {
+            color: #718096;
+            font-size: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .rating-bars {
+            margin: 15px 0;
+        }
+
+        .rating-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+
+        .rating-label {
+            font-size: 0.8rem;
+            color: #4a5568;
+            width: 80px;
+            margin-right: 10px;
+        }
+
+        .rating-bar {
+            flex: 1;
+            height: 8px;
+            background: #e2e8f0;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-right: 5px;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: var(--accent-color);
+            transition: width 0.5s ease;
+        }
+
+        .rating-score {
+            font-size: 0.7rem;
+            font-weight: bold;
+            color: #667eea;
+            width: 25px;
+        }
+
+        .recommendations {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-top: 40px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .workflow-section {
+            background: #f7fafc;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+
+        .workflow-section h3 {
+            color: #2d3748;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .workflow-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .workflow-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .workflow-title {
+            font-weight: bold;
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .workflow-steps {
+            list-style: none;
+        }
+
+        .workflow-steps li {
+            padding: 5px 0;
+            color: #4a5568;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .workflow-steps li::before {
+            content: '→';
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .ai-card {
+            animation: fadeInUp 0.8s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .comparison-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+            
+            .platform-selector {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .ai-card {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📱 IA para Content Creators</h1>
+            <p>TikTok, Instagram y Blog - Tu arsenal completo</p>
+        </div>
+
+        <div class="platform-selector">
+            <button class="platform-btn active" data-platform="all">📊 Ver Todo</button>
+            <button class="platform-btn" data-platform="tiktok">🎵 TikTok</button>
+            <button class="platform-btn" data-platform="instagram">📸 Instagram</button>
+            <button class="platform-btn" data-platform="blog">✍️ Blog/Artículos</button>
+        </div>
+
+        <div class="comparison-grid">
+            <!-- ChatGPT Card -->
+            <div class="ai-card chatgpt" data-platforms="tiktok,instagram,blog">
+                <div class="ai-header">
+                    <div class="ai-icon">GPT</div>
+                    <div>
+                        <div class="ai-title">ChatGPT</div>
+                        <div class="ai-subtitle">El Todo Terreno</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge tiktok">TikTok</span>
+                    <span class="badge instagram">Instagram</span>
+                    <span class="badge blog">Blog</span>
+                </div>
+                
+                <div class="price-tag">€20/mes</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 85%"></div></div>
+                        <div class="rating-score">8.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 90%"></div></div>
+                        <div class="rating-score">9/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 95%"></div></div>
+                        <div class="rating-score">9.5/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section tiktok">
+                        <div class="example-item">
+                            <div class="example-title">📱 Guiones TikTok</div>
+                            <div class="example-description">Hook + desarrollo + CTA en 15-60 segundos</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎭 Ideas de Trends</div>
+                            <div class="example-description">Adapta trending sounds a tu nicho específico</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section instagram">
+                        <div class="example-item">
+                            <div class="example-title">📸 Captions Virales</div>
+                            <div class="example-description">Captions que generan engagement y saves</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">📊 Ideas de Carousels</div>
+                            <div class="example-description">10 slides educativos sobre cualquier tema</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section blog">
+                        <div class="example-item">
+                            <div class="example-title">📝 Artículos SEO</div>
+                            <div class="example-description">Estructura completa optimizada para Google</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎯 Headlines Clickbait</div>
+                            <div class="example-description">Títulos que generan clicks sin decepcionar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Claude Card -->
+            <div class="ai-card claude" data-platforms="instagram,blog">
+                <div class="ai-header">
+                    <div class="ai-icon">C</div>
+                    <div>
+                        <div class="ai-title">Claude</div>
+                        <div class="ai-subtitle">El Escritor Natural</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge instagram">Instagram</span>
+                    <span class="badge blog">Blog</span>
+                </div>
+                
+                <div class="price-tag">€18/mes</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 70%"></div></div>
+                        <div class="rating-score">7/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 95%"></div></div>
+                        <div class="rating-score">9.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 98%"></div></div>
+                        <div class="rating-score">9.8/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section instagram">
+                        <div class="example-item">
+                            <div class="example-title">💭 Storytelling Posts</div>
+                            <div class="example-description">Historias personales que conectan emocionalmente</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎨 Captions Creativos</div>
+                            <div class="example-description">Texto que suena humano y auténtico</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section blog">
+                        <div class="example-item">
+                            <div class="example-title">📖 Long-form Content</div>
+                            <div class="example-description">Artículos de 2000+ palabras que fluyen natural</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎯 Personal Essays</div>
+                            <div class="example-description">Contenido personal y reflexivo de alta calidad</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Minimax Card -->
+            <div class="ai-card minimax" data-platforms="tiktok,instagram">
+                <div class="ai-header">
+                    <div class="ai-icon">M</div>
+                    <div>
+                        <div class="ai-title">Minimax</div>
+                        <div class="ai-subtitle">El Rey Visual</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge tiktok">TikTok</span>
+                    <span class="badge instagram">Instagram</span>
+                </div>
+                
+                <div class="price-tag">€25-60/mes</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 98%"></div></div>
+                        <div class="rating-score">9.8/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 100%"></div></div>
+                        <div class="rating-score">10/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 60%"></div></div>
+                        <div class="rating-score">6/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section tiktok">
+                        <div class="example-item">
+                            <div class="example-title">🎬 Videos Automatizados</div>
+                            <div class="example-description">De texto a video TikTok en minutos</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎨 B-roll Creativo</div>
+                            <div class="example-description">Fondos y animaciones que no requieren grabación</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section instagram">
+                        <div class="example-item">
+                            <div class="example-title">📊 Carousels Visuales</div>
+                            <div class="example-description">10 slides profesionales en minutos</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎯 Stories Dinámicos</div>
+                            <div class="example-description">Templates animados que captan atención</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Grok Card -->
+            <div class="ai-card grok" data-platforms="tiktok,instagram">
+                <div class="ai-header">
+                    <div class="ai-icon">X</div>
+                    <div>
+                        <div class="ai-title">Grok</div>
+                        <div class="ai-subtitle">El Trending Master</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge tiktok">TikTok</span>
+                    <span class="badge instagram">Instagram</span>
+                </div>
+                
+                <div class="price-tag">€8/mes</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 95%"></div></div>
+                        <div class="rating-score">9.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 85%"></div></div>
+                        <div class="rating-score">8.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 70%"></div></div>
+                        <div class="rating-score">7/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section tiktok">
+                        <div class="example-item">
+                            <div class="example-title">🔥 Trends del Momento</div>
+                            <div class="example-description">Qué está viral AHORA MISMO en tu nicho</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">⚡ React Content</div>
+                            <div class="example-description">Reaccionar a noticias y eventos actuales</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section instagram">
+                        <div class="example-item">
+                            <div class="example-title">📰 News Jacking</div>
+                            <div class="example-description">Conecta eventos actuales con tu contenido</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎯 Trending Hashtags</div>
+                            <div class="example-description">Hashtags que están explotando ahora</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DeepSeek Card -->
+            <div class="ai-card deepseek" data-platforms="tiktok,instagram,blog">
+                <div class="ai-header">
+                    <div class="ai-icon">DS</div>
+                    <div>
+                        <div class="ai-title">DeepSeek</div>
+                        <div class="ai-subtitle">El Starter Gratuito</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge tiktok">TikTok</span>
+                    <span class="badge instagram">Instagram</span>
+                    <span class="badge blog">Blog</span>
+                </div>
+                
+                <div class="price-tag">GRATIS</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 80%"></div></div>
+                        <div class="rating-score">8/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 75%"></div></div>
+                        <div class="rating-score">7.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 85%"></div></div>
+                        <div class="rating-score">8.5/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section tiktok">
+                        <div class="example-item">
+                            <div class="example-title">💡 Brainstorming Ideas</div>
+                            <div class="example-description">50+ ideas de contenido para tu nicho</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">✍️ Scripts Básicos</div>
+                            <div class="example-description">Estructura para videos educativos/entretenimiento</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section instagram blog">
+                        <div class="example-item">
+                            <div class="example-title">📝 Primeros Drafts</div>
+                            <div class="example-description">Borradores que luego puedes pulir manualmente</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎯 Research Assistant</div>
+                            <div class="example-description">Investigación básica para tus contenidos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Gemini Card -->
+            <div class="ai-card gemini" data-platforms="blog,instagram">
+                <div class="ai-header">
+                    <div class="ai-icon">G</div>
+                    <div>
+                        <div class="ai-title">Gemini</div>
+                        <div class="ai-subtitle">El SEO Master</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge instagram">Instagram</span>
+                    <span class="badge blog">Blog</span>
+                </div>
+                
+                <div class="price-tag">€20/mes</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 65%"></div></div>
+                        <div class="rating-score">6.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 85%"></div></div>
+                        <div class="rating-score">8.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 95%"></div></div>
+                        <div class="rating-score">9.5/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section blog">
+                        <div class="example-item">
+                            <div class="example-title">🔍 Keywords Research</div>
+                            <div class="example-description">Encuentra las palabras clave exactas para rankear</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">📊 Competitor Analysis</div>
+                            <div class="example-description">Analiza qué está funcionando en tu nicho</div>
+                        </div>
+                    </div>
+
+                    <div class="content-section instagram">
+                        <div class="example-item">
+                            <div class="example-title">📈 Growth Strategy</div>
+                            <div class="example-description">Estrategias basadas en data real de Google</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🎯 Content Calendar</div>
+                            <div class="example-description">Planifica contenido basado en búsquedas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kimi Card -->
+            <div class="ai-card kimi" data-platforms="blog">
+                <div class="ai-header">
+                    <div class="ai-icon">K</div>
+                    <div>
+                        <div class="ai-title">Kimi</div>
+                        <div class="ai-subtitle">El Investigador Pro</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge blog">Blog</span>
+                </div>
+                
+                <div class="price-tag">€15-30/mes</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 60%"></div></div>
+                        <div class="rating-score">6/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 75%"></div></div>
+                        <div class="rating-score">7.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 100%"></div></div>
+                        <div class="rating-score">10/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section blog">
+                        <div class="example-item">
+                            <div class="example-title">📚 Deep Research</div>
+                            <div class="example-description">Lee 20+ PDFs y crea artículos con fuentes reales</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">📰 News Synthesis</div>
+                            <div class="example-description">Combina múltiples fuentes en análisis únicos</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Qwen Card -->
+            <div class="ai-card qwen" data-platforms="blog">
+                <div class="ai-header">
+                    <div class="ai-icon">Q</div>
+                    <div>
+                        <div class="ai-title">Qwen</div>
+                        <div class="ai-subtitle">El Personalizable</div>
+                    </div>
+                </div>
+                
+                <div class="platform-badges">
+                    <span class="badge blog">Blog</span>
+                </div>
+                
+                <div class="price-tag">€20-50/mes</div>
+
+                <div class="rating-bars">
+                    <div class="rating-item">
+                        <div class="rating-label">TikTok</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 70%"></div></div>
+                        <div class="rating-score">7/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Instagram</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 75%"></div></div>
+                        <div class="rating-score">7.5/10</div>
+                    </div>
+                    <div class="rating-item">
+                        <div class="rating-label">Blog</div>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 90%"></div></div>
+                        <div class="rating-score">9/10</div>
+                    </div>
+                </div>
+
+                <div class="content-examples">
+                    <h4>💡 Cómo lo usas para:</h4>
+                    
+                    <div class="content-section blog">
+                        <div class="example-item">
+                            <div class="example-title">🎯 Niche Expertise</div>
+                            <div class="example-description">Entrenas tu propio asistente con tu expertise</div>
+                        </div>
+                        <div class="example-item">
+                            <div class="example-title">🌍 Multi-language</div>
+                            <div class="example-description">Contenido simultáneo en varios idiomas</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="recommendations">
+            <div class="workflow-section">
+                <h3>🎬 Workflows por Plataforma</h3>
+                
+                <div class="workflow-grid">
+                    <div class="workflow-card">
+                        <div class="workflow-title">🎵 TikTok Viral Workflow</div>
+                        <ul class="workflow-steps">
+                            <li><strong>Grok:</strong> Encuentra el trend del momento</li>
+                            <li><strong>ChatGPT:</strong> Adapta el trend a tu nicho</li>
+                            <li><strong>Minimax:</strong> Crea el video visualmente atractivo</li>
+                            <li><strong>Grok:</strong> Hashtags trending para máximo alcance</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-card">
+                        <div class="workflow-title">📸 Instagram Growth Workflow</div>
+                        <ul class="workflow-steps">
+                            <li><strong>Gemini:</strong> Research de keywords y competencia</li>
+                            <li><strong>Claude:</strong> Caption que conecta emocionalmente</li>
+                            <li><strong>Minimax:</strong> Carousel de 10 slides impactante</li>
+                            <li><strong>ChatGPT:</strong> Stories y engagement strategy</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-card">
+                        <div class="workflow-title">✍️ Blog Authority Workflow</div>
+                        <ul class="workflow-steps">
+                            <li><strong>Kimi:</strong> Research profundo con múltiples fuentes</li>
+                            <li><strong>Gemini:</strong> SEO optimization y keyword strategy</li>
+                            <li><strong>Claude:</strong> Escritura natural de 2000+ palabras</li>
+                            <li><strong>ChatGPT:</strong> Meta descriptions y social snippets</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="workflow-section">
+                <h3>💰 Recomendaciones por Presupuesto</h3>
+                
+                <div class="workflow-grid">
+                    <div class="workflow-card" style="border-color: #48bb78;">
+                        <div class="workflow-title" style="color: #48bb78;">💚 Presupuesto €0-15/mes</div>
+                        <ul class="workflow-steps">
+                            <li><strong>DeepSeek (GRATIS)</strong> para ideas y borradores</li>
+                            <li><strong>Grok (€8)</strong> para trends y actualidad</li>
+                            <li><strong>Total:</strong> €8/mes + trabajo manual</li>
+                            <li><strong>Best for:</strong> Empezar y validar nicho</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-card" style="border-color: #667eea;">
+                        <div class="workflow-title" style="color: #667eea;">💙 Presupuesto €15-40/mes</div>
+                        <ul class="workflow-steps">
+                            <li><strong>ChatGPT (€20)</strong> como base principal</li>
+                            <li><strong>Claude (€18)</strong> para contenido premium</li>
+                            <li><strong>Total:</strong> €20-38/mes</li>
+                            <li><strong>Best for:</strong> Creators establecidos</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-card" style="border-color: #f59e0b;">
+                        <div class="workflow-title" style="color: #f59e0b;">🧡 Presupuesto €60-100/mes</div>
+                        <ul class="workflow-steps">
+                            <li><strong>ChatGPT + Claude + Minimax</strong></li>
+                            <li><strong>Gemini</strong> para SEO y research</li>
+                            <li><strong>Total:</strong> €60-85/mes</li>
+                            <li><strong>Best for:</strong> Profesionales full-time</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-card" style="border-color: #8b5cf6;">
+                        <div class="workflow-title" style="color: #8b5cf6;">💜 Setup Premium €100+/mes</div>
+                        <ul class="workflow-steps">
+                            <li><strong>Stack completo:</strong> Todo lo anterior</li>
+                            <li><strong>Kimi + Qwen</strong> para investigación avanzada</li>
+                            <li><strong>ChatGPT Pro (€200)</strong> para máxima velocidad</li>
+                            <li><strong>Best for:</strong> Agencias y equipos</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="workflow-section">
+                <h3>🎯 Tu Plan de Acción Inmediato</h3>
+                
+                <div class="workflow-grid">
+                    <div class="workflow-card">
+                        <div class="workflow-title">📱 Si eres TikToker</div>
+                        <ul class="workflow-steps">
+                            <li><strong>Semana 1:</strong> Empieza con Grok (€8) para trends</li>
+                            <li><strong>Semana 2-3:</strong> Agrega ChatGPT para guiones</li>
+                            <li><strong>Mes 2:</strong> Invierte en Minimax para visuals</li>
+                            <li><strong>Meta:</strong> 10K followers en 3 meses</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-card">
+                        <div class="workflow-title">📸 Si eres Instagramer</div>
+                        <ul class="workflow-steps">
+                            <li><strong>Semana 1:</strong> ChatGPT para captions y ideas</li>
+                            <li><strong>Semana 2:</strong> Minimax para carousels visuales</li>
+                            <li><strong>Mes 2:</strong> Claude para storytelling auténtico</li>
+                            <li><strong>Meta:</strong> 50K reach orgánico mensual</li>
+                        </ul>
+                    </div>
+
+                    <div class="workflow-card">
+                        <div class="workflow-title">✍️ Si eres Blogger</div>
+                        <ul class="workflow-steps">
+                            <li><strong>Semana 1:</strong> Claude para tu primer artículo épico</li>
+                            <li><strong>Semana 2:</strong> Gemini para SEO optimization</li>
+                            <li><strong>Mes 2:</strong> Kimi para research de autoridad</li>
+                            <li><strong>Meta:</strong> 10K visitas orgánicas mensuales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const platformButtons = document.querySelectorAll('.platform-btn');
+            const aiCards = document.querySelectorAll('.ai-card');
+
+            // Platform filtering
+            platformButtons.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // Remove active class from all buttons
+                    platformButtons.forEach(b => b.classList.remove('active'));
+                    // Add active class to clicked button
+                    this.classList.add('active');
+                    
+                    const selectedPlatform = this.dataset.platform;
+                    
+                    aiCards.forEach(card => {
+                        const cardPlatforms = card.dataset.platforms;
+                        
+                        if (selectedPlatform === 'all') {
+                            card.classList.remove('hidden');
+                        } else {
+                            if (cardPlatforms.includes(selectedPlatform)) {
+                                card.classList.remove('hidden');
+                            } else {
+                                card.classList.add('hidden');
+                            }
+                        }
+                        
+                        // Show/hide content sections
+                        const contentSections = card.querySelectorAll('.content-section');
+                        contentSections.forEach(section => {
+                            section.classList.remove('active');
+                            if (selectedPlatform === 'all') {
+                                // Show all sections for all view
+                                section.classList.add('active');
+                            } else {
+                                if (section.classList.contains(selectedPlatform)) {
+                                    section.classList.add('active');
+                                }
+                            }
+                        });
+                    });
+                });
+            });
+
+            // Initialize - show all sections for "all" view
+            aiCards.forEach(card => {
+                const contentSections = card.querySelectorAll('.content-section');
+                contentSections.forEach(section => {
+                    section.classList.add('active');
+                });
+            });
+
+            // Card hover effects
+            aiCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    if (!this.classList.contains('hidden')) {
+                        this.style.transform = 'translateY(-10px) scale(1.02)';
+                    }
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+
+            // Workflow card hover effects
+            const workflowCards = document.querySelectorAll('.workflow-card');
+            
+            workflowCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.borderColor = '#667eea';
+                    this.style.transform = 'translateY(-3px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    const originalColor = this.style.borderColor;
+                    if (!originalColor || originalColor === 'rgb(102, 126, 234)') {
+                        this.style.borderColor = 'transparent';
+                    }
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
