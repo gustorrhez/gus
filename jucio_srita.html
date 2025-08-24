@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de la Leona Valiente: Tu Poder</title>
+    <!-- Carga Tailwind CSS para un diseño hermoso y responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts - Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fef2f2; /* Tailwind red-50, un fondo muy suave */
+            color: #4b5563; /* Tailwind gray-600 */
+        }
+        .container {
+            max-width: 95%;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+        @media (min-width: 768px) {
+            .container {
+                max-width: 800px; /* Ancho máximo para pantallas grandes */
+                padding: 3rem 2rem;
+            }
+        }
+        .accordion-item {
+            border-radius: 0.75rem; /* rounded-xl */
+            margin-bottom: 1rem;
+            overflow: hidden; /* Para que el contenido se vea bien al colapsar/expandir */
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06); /* Sombra sutil */
+        }
+        .accordion-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.25rem 1.5rem;
+            font-weight: 700;
+            font-size: 1.25rem; /* text-xl */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .accordion-header:hover {
+            background-color: rgba(254, 226, 226, 0.5); /* red-100 con opacidad */
+        }
+        .accordion-content {
+            padding: 0 1.5rem; /* Padding horizontal, vertical se controla con max-height */
+            background-color: #fff;
+            border-top: 1px solid #fecaca; /* red-200 */
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Animación más suave */
+        }
+        .accordion-content.active {
+            padding-top: 1rem; /* Añade padding vertical al abrir */
+            padding-bottom: 1rem; /* Añade padding vertical al abrir */
+            max-height: 500px; /* Ajusta este valor si el contenido es muy largo */
+        }
+        .arrow {
+            transition: transform 0.3s ease;
+        }
+        .arrow.rotate {
+            transform: rotate(180deg);
+        }
+        h2.section-title {
+            font-size: 2.25rem; /* text-4xl */
+            font-weight: 800; /* Extra bold */
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background-image: linear-gradient(to right, #ef4444, #f97316); /* Degradado rojo-naranja */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .intro-text, .conclusion-text {
+            font-size: 1.15rem; /* text-lg */
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        .ritual-box {
+            position: relative; /* Necesario para posicionar el confetti */
+            background-color: #fef2f2; /* red-50 */
+            border-left: 5px solid #ef4444; /* red-500 */
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-top: 1rem;
+            font-style: italic;
+            color: #b91c1c; /* red-700 */
+        }
+        /* Estilos para el botón "Volver Arriba" */
+        #scrollToTopBtn {
+            display: none; /* Oculto por defecto */
+            position: fixed; /* Fijo en la pantalla */
+            bottom: 20px; /* 20px desde la parte inferior */
+            right: 20px; /* 20px desde la derecha */
+            z-index: 99; /* Para que esté por encima de otros elementos */
+            border: none;
+            outline: none;
+            background-color: #ef4444; /* Fondo rojo de Tailwind */
+            color: white;
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        #scrollToTopBtn:hover {
+            background-color: #dc2626; /* Rojo más oscuro al pasar el ratón */
+            transform: scale(1.1);
+        }
+
+        /* Confetti effect styles */
+        .confetti-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #f97316; /* Color de corazón */
+            border-radius: 50%;
+            opacity: 0;
+            animation: fall 2s forwards ease-out;
+            transform: scale(0);
+        }
+        .confetti.heart {
+            background-color: #ef4444; /* Color de corazón */
+            width: 12px;
+            height: 12px;
+            border-radius: 0;
+            transform: rotate(-45deg);
+        }
+        .confetti.heart::before,
+        .confetti.heart::after {
+            content: '';
+            width: 12px;
+            height: 12px;
+            background-color: #ef4444;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .confetti.heart::before {
+            top: -6px;
+            left: 0;
+        }
+        .confetti.heart::after {
+            top: 0;
+            left: 6px;
+        }
+
+        @keyframes fall {
+            0% { transform: translate(0, -10px) scale(0); opacity: 0; }
+            20% { opacity: 1; transform: scale(1); }
+            100% { transform: translate(var(--x), var(--y)) scale(0.5); opacity: 0; }
+        }
+    </style>
+</head>
+<body class="bg-red-50 min-h-screen flex items-center justify-center py-10">
+
+    <div class="container bg-white p-6 rounded-2xl shadow-2xl text-center border border-red-200">
+        <h1 class="text-4xl font-extrabold text-red-700 mb-4 leading-tight">
+            ✨ Tu Guía de la Leona Valiente ✨
+        </h1>
+        <p class="text-xl text-gray-700 mb-8 font-semibold">
+            Transformando la Indignación en Poder 🦁
+        </p>
+
+        <!-- Intro -->
+        <div class="intro-text text-gray-700 text-left mb-8 px-2">
+            <p class="mb-4">Mi querida Karla, mi Señorieta,</p>
+            <p class="mb-4">Sé que hoy tu corazón debe estar en un torbellino. Escuchar que J minimiza el maltrato de Adam, y saber que los mosqueteros (aunque con un escudo de protección) deberán testificar, es frustrante, enojoso e indignante. Y quiero que sepas que **ese enojo es válido, justo y poderoso**. No hay nada de "malo" en sentirlo. Es la energía de la leona que llevas dentro, protegiendo a sus cachorros.</p>
+            <p>Por favor, no reprimas esas emociones. Dales espacio, pero canalízalas. Quiero que uses esta guía como un espejo que te recuerda tu fuerza y el propósito de todo esto.</p>
+        </div>
+
+        <!-- Sección 1: Valida tu Indignación -->
+        <div class="accordion-item bg-red-100">
+            <div class="accordion-header text-red-800" onclick="toggleAccordion('content1', 'arrow1')">
+                <span>1. Valida tu Indignación: Es tu Combustible 🔥</span>
+                <span id="arrow1" class="arrow">&#9660;</span> <!-- Flecha hacia abajo -->
+            </div>
+            <div id="content1" class="accordion-content text-left text-gray-700">
+                <p class="mb-4">Ese coraje que sientes es una señal clara de que estás en el camino correcto. Es la voz de tu intuición, de tu amor maternal, gritándote que lo que está pasando no es justo.</p>
+                <ul class="list-disc list-inside space-y-2 mb-4">
+                    <li>**J. no está minimizando el maltrato para ti; lo está haciendo para SÍ MISMO.** Es su forma de evadir la realidad, de intentar no enfrentar las consecuencias. Esto no debilita tu verdad; la subraya.</li>
+                    <li>**La verdad es innegable:** No importa cuántas veces él intente cambiar la narrativa, la verdad de lo que Adam vivió está escrita en su memoria y en el expediente. Los niños no mienten.</li>
+                    <li>**Permite que el enojo fluya:** No te lo guardes. Puedes escribirlo en tu diario, hablarlo conmigo, o simplemente respirar hondo y sentir cómo esa energía se transforma en determinación.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sección 2: La Estrategia del "Reordenamiento" -->
+        <div class="accordion-item bg-orange-100">
+            <div class="accordion-header text-orange-800" onclick="toggleAccordion('content2', 'arrow2')">
+                <span>2. La Estrategia del "Reordenamiento": J. Se Descalifica Solo ♟️</span>
+                <span id="arrow2" class="arrow">&#9660;</span>
+            </div>
+            <div id="content2" class="accordion-content text-left text-gray-700">
+                <p class="mb-4">Gustavo me lo ha dicho y yo lo siento: **Las acciones de J. no te están perjudicando; lo están descalificando más y más frente a todos, especialmente a largo plazo.**</p>
+                <ul class="list-disc list-inside space-y-2 mb-4">
+                    <li>**Los niños lo verán:** Tienes razón. Cuando tus mosqueteros crezcan, recordarán cada palabra, cada acción. Recordarán quién los protegió y quién intentó evadir su responsabilidad. La verdad es un boomerang: siempre regresa. Las acciones de J. están cavando una zanja cada vez más profunda entre él y sus hijos.</li>
+                    <li>**La abogada es su escudo:** El hecho de que la abogada pida que los niños testifiquen fuera de la sala es una victoria. Significa que el sistema está protegiéndolos y que su testimonio es considerado crucial. Los mosqueteros estarán en un espacio seguro, escuchados y validados.</li>
+                    <li>**Tu posición se fortalece:** Cada maniobra de J. para "minimizar" el abuso y presionar a los niños, solo refuerza tu argumento de que es necesario protegerlos de su influencia y falta de reconocimiento de su error. Él te está dando más munición legal.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Sección 3: Tu Ancla de Serenidad -->
+        <div class="accordion-item bg-amber-100">
+            <div class="accordion-header text-amber-800" onclick="toggleAccordion('content3', 'arrow3')">
+                <span>3. Tu Ancla de Serenidad: Enfócate en lo que Sí Controlas ⚓️</span>
+                <span id="arrow3" class="arrow">&#9660;</span>
+            </div>
+            <div id="content3" class="accordion-content text-left text-gray-700">
+                <p class="mb-4">En medio de la tormenta, tú eres la capitana. No puedes controlar lo que J. dice o hace, pero sí puedes controlar tu reacción y tu energía.</p>
+                <ul class="list-disc list-inside space-y-2 mb-4">
+                    <li>**Tu Propósito es tu Farol:** Recuerda por qué estás haciendo esto: por la paz, la seguridad y el bienestar emocional de tus hijos. Ese propósito es tu luz más brillante.</li>
+                    <li>**Tu Verdad es tu Armadura:** Ya has preparado tu historia, la has vivido. No tienes que "convencer". Solo tienes que presentar tu verdad, con calma y firmeza.</li>
+                    <li>**Visualiza la Calma para los Niños:** Piensa en cómo la abogada los representará, cómo ellos estarán protegidos. Visualiza su fortaleza al decir la verdad. Ellos son valientes gracias a ti.</li>
+                </ul>
+                <div class="ritual-box" id="ritualBox">
+                    <h3 class="font-bold text-lg text-red-800 mb-2">El Ritual de la Leona (Ejercicio Mental):</h3>
+                    <ul class="list-disc list-inside space-y-2 text-red-700">
+                        <li>Cierra los ojos. Inhala profundamente, llenando tus pulmones de oxígeno, de calma.</li>
+                        <li>Al exhalar, imagina que sueltas el enojo y la frustración como una nube oscura que se disipa.</li>
+                        <li>Ahora, visualízate como una leona. Fuerte, serena, con una mirada profunda y protectora. Siente el poder en tu cuerpo. Sabes exactamente qué hacer para proteger a tus cachorros. No hay miedo, solo sabiduría y determinación.</li>
+                        <li>Repite en silencio: "Mi verdad es inquebrantable. Mis hijos están protegidos. Yo soy su fuerza."</li>
+                    </ul>
+                    <button id="completeRitualBtn" class="mt-4 bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full transition-colors duration-200 shadow-md">
+                        ¡Ritual Completado! ❤️
+                    </button>
+                    <div id="confettiContainer" class="confetti-container"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sección 4: No Estás Sola -->
+        <div class="accordion-item bg-rose-100">
+            <div class="accordion-header text-rose-800" onclick="toggleAccordion('content4', 'arrow4')">
+                <span>4. No Estás Sola: Tu Equipo de Apoyo 🫂</span>
+                <span id="arrow4" class="arrow">&#9660;</span>
+            </div>
+            <div id="content4" class="accordion-content text-left text-gray-700">
+                <p class="mb-4">Recuerda que tienes un ejército de amor a tu alrededor. Tu primo, tu mamá, tus abogados, y yo.</p>
+                <p>Estoy aquí, Gustavo, incondicionalmente. Estoy tan enojado como tú, y estoy tan firme como tú. Mi mano está tendida para la tuya, lista para sostener, para escuchar, para compartir el peso. Pase lo que pase, tú ya eres una victoriosa por tu valentía y tu amor.</p>
+            </div>
+        </div>
+
+        <!-- Conclusión -->
+        <div class="conclusion-text text-gray-700 text-left mt-8 px-2">
+            <p class="font-bold text-lg text-red-700 mb-2">Te quiero muchísimo, mi Leona Valiente. Confía en tu fuerza. 💖</p>
+            <p class="text-right text-gray-500 mt-4">- Gustavo</p>
+        </div>
+    </div>
+
+    <!-- Botón "Volver Arriba" -->
+    <button id="scrollToTopBtn" title="Volver Arriba">&#9650;</button>
+
+    <script>
+        /**
+         * Alterna la visibilidad y el estado de rotación de la flecha de un acordeón.
+         *
+         * @param {string} contentId - El ID del elemento de contenido del acordeón.
+         * @param {string} arrowId - El ID del elemento de la flecha del acordeón.
+         */
+        function toggleAccordion(contentId, arrowId) {
+            const content = document.getElementById(contentId);
+            const arrow = document.getElementById(arrowId);
+
+            const isActive = content.classList.contains('active');
+
+            // Quitar 'active' para todas las secciones primero si quieres que solo una esté abierta a la vez
+            // document.querySelectorAll('.accordion-content.active').forEach(item => {
+            //     item.classList.remove('active');
+            //     item.style.maxHeight = null;
+            //     item.previousElementSibling.querySelector('.arrow').classList.remove('rotate');
+            // });
+
+            if (isActive) {
+                content.style.maxHeight = null; // Colapsar
+                content.classList.remove('active');
+                arrow.classList.remove('rotate');
+            } else {
+                // Expandir
+                content.style.maxHeight = content.scrollHeight + 'px';
+                content.classList.add('active');
+                arrow.classList.add('rotate');
+            }
+        }
+
+        // --- Funcionalidad del botón "Volver Arriba" ---
+        const scrollToTopBtn = document.getElementById("scrollToTopBtn");
+
+        // Muestra el botón cuando se hace scroll hacia abajo
+        window.onscroll = function() {
+            if (document.body.scrollTop > 200 || document.documentElement.scrollTop > 200) {
+                scrollToTopBtn.style.display = "block";
+            } else {
+                scrollToTopBtn.style.display = "none";
+            }
+        };
+
+        // Cuando se hace clic en el botón, se desplaza hacia arriba
+        scrollToTopBtn.addEventListener("click", function() {
+            window.scrollTo({
+                top: 0,
+                behavior: "smooth"
+            });
+        });
+
+        // --- Funcionalidad del Confeti en el Ritual ---
+        const completeRitualBtn = document.getElementById('completeRitualBtn');
+        const confettiContainer = document.getElementById('confettiContainer');
+
+        completeRitualBtn.addEventListener('click', () => {
+            for (let i = 0; i < 30; i++) { // Generar 30 corazones de confetti
+                const heart = document.createElement('div');
+                heart.classList.add('confetti', 'heart');
+
+                // Posición inicial aleatoria dentro del botón o ritualBox
+                const startX = Math.random() * 100 + '%';
+                const startY = Math.random() * 50 + '%'; // Start slightly above the button
+
+                heart.style.left = startX;
+                heart.style.top = startY;
+
+                // Propiedades de animación aleatorias
+                heart.style.setProperty('--x', `${(Math.random() - 0.5) * 300}px`); // De -150px a 150px
+                heart.style.setProperty('--y', `${Math.random() * 200 + 50}px`); // De 50px a 250px hacia abajo
+
+                confettiContainer.appendChild(heart);
+
+                // Eliminar el corazón después de la animación
+                heart.addEventListener('animationend', () => {
+                    heart.remove();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
