@@ -1,0 +1,1156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gustavo Torres | Consultor en IA para Emprendedores</title>
+    <meta name="description" content="Consultor en Integración de IA. Ayudo a emprendedores a optimizar su negocio con inteligencia artificial de forma estratégica y práctica.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --morado: #7B68EE;
+            --turquesa: #00CED1;
+            --blanco: #FFFFFF;
+            --rosa: #FF69B4;
+            --verde: #32CD32;
+            --gris-oscuro: #2a2a2a;
+            --gris-claro: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: var(--gris-oscuro);
+            overflow-x: hidden;
+        }
+        
+        /* Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gris-oscuro);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--morado);
+        }
+        
+        /* Botones */
+        .btn {
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            color: var(--blanco);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(123, 104, 238, 0.3);
+        }
+        
+        .btn-secondary {
+            background: var(--blanco);
+            color: var(--morado);
+            border: 2px solid var(--morado);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--morado);
+            color: var(--blanco);
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(123, 104, 238, 0.05), rgba(0, 206, 209, 0.05));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--rosa) 0%, transparent 70%);
+            opacity: 0.1;
+            top: -200px;
+            right: -200px;
+            border-radius: 50%;
+        }
+        
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 3rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-content p {
+            font-size: 1.25rem;
+            color: #666;
+            margin-bottom: 2rem;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .hero-image {
+            position: relative;
+        }
+        
+        .hero-image-placeholder {
+            width: 100%;
+            height: 500px;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 3rem;
+            box-shadow: 0 20px 60px rgba(123, 104, 238, 0.3);
+        }
+        
+        /* Secciones */
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2rem;
+            margin-bottom: 4rem;
+        }
+        
+        /* Confianza */
+        .trust-bar {
+            background: var(--gris-claro);
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        .trust-bar p {
+            font-weight: 600;
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .clients {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .client-badge {
+            padding: 0.5rem 1.5rem;
+            background: var(--blanco);
+            border-radius: 20px;
+            font-weight: 500;
+            color: var(--morado);
+        }
+        
+        /* Problema/Solución */
+        .problem-solution {
+            background: var(--gris-claro);
+        }
+        
+        .problem-solution .content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+        
+        .problem-solution h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--morado);
+        }
+        
+        .problem-solution p {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            color: #555;
+        }
+        
+        .highlight-box {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 20px;
+            border-left: 5px solid var(--turquesa);
+        }
+        
+        /* Sobre Mí */
+        .about .content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+        
+        .about-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, var(--turquesa), var(--verde));
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 4rem;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--morado);
+        }
+        
+        .about-text p {
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            color: #555;
+        }
+        
+        .mission-box {
+            background: linear-gradient(135deg, rgba(123, 104, 238, 0.1), rgba(0, 206, 209, 0.1));
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-top: 2rem;
+            border-left: 5px solid var(--rosa);
+        }
+        
+        /* Servicios */
+        .services {
+            background: var(--gris-claro);
+        }
+        
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .service-card {
+            background: var(--blanco);
+            padding: 2.5rem;
+            border-radius: 20px;
+            transition: all 0.3s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--morado), var(--turquesa));
+        }
+        
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--morado);
+        }
+        
+        .service-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .service-meta {
+            display: flex;
+            gap: 1rem;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .service-tag {
+            padding: 0.3rem 1rem;
+            background: rgba(123, 104, 238, 0.1);
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: var(--morado);
+        }
+        
+        /* Testimonios */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+        
+        .testimonial-card {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            position: relative;
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 20px;
+            font-size: 6rem;
+            color: var(--turquesa);
+            opacity: 0.2;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--rosa), var(--verde));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-weight: 700;
+        }
+        
+        .author-info h4 {
+            color: var(--morado);
+            font-size: 1rem;
+        }
+        
+        .author-info p {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* Blog */
+        .blog {
+            background: var(--gris-claro);
+        }
+        
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .blog-card {
+            background: var(--blanco);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 2rem;
+        }
+        
+        .blog-content {
+            padding: 1.5rem;
+        }
+        
+        .blog-content h3 {
+            color: var(--morado);
+            margin-bottom: 0.5rem;
+        }
+        
+        .blog-content p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .blog-date {
+            font-size: 0.9rem;
+            color: #999;
+        }
+        
+        /* Recursos */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .resource-card {
+            background: linear-gradient(135deg, rgba(123, 104, 238, 0.05), rgba(0, 206, 209, 0.05));
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+        }
+        
+        .resource-card:hover {
+            transform: scale(1.05);
+        }
+        
+        .resource-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--blanco);
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .resource-card h3 {
+            color: var(--morado);
+            margin-bottom: 1rem;
+        }
+        
+        .resource-card p {
+            color: #666;
+            margin-bottom: 1.5rem;
+        }
+        
+        /* Tienda */
+        .shop {
+            background: var(--gris-claro);
+        }
+        
+        .coming-soon {
+            text-align: center;
+            padding: 4rem 2rem;
+            background: var(--blanco);
+            border-radius: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .coming-soon h3 {
+            font-size: 2rem;
+            color: var(--morado);
+            margin-bottom: 1rem;
+        }
+        
+        .coming-soon p {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1rem;
+        }
+        
+        .waitlist-form {
+            display: flex;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        .waitlist-form input {
+            flex: 1;
+            padding: 1rem;
+            border: 2px solid var(--morado);
+            border-radius: 50px;
+            font-size: 1rem;
+        }
+        
+        /* Contacto */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .contact-option {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .contact-option:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+        }
+        
+        .contact-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            border-radius: 50%;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 1.8rem;
+        }
+        
+        .contact-option h3 {
+            color: var(--morado);
+            margin-bottom: 0.5rem;
+        }
+        
+        .contact-option p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gris-oscuro);
+            color: var(--blanco);
+            padding: 3rem 2rem 1rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-section h4 {
+            margin-bottom: 1rem;
+            color: var(--turquesa);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-section a:hover {
+            color: var(--turquesa);
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--morado);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--turquesa);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero .container {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .problem-solution .content,
+            .about .content {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-ctas {
+                flex-direction: column;
+            }
+            
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .waitlist-form {
+                flex-direction: column;
+            }
+        }
+        
+        /* Animaciones */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="container">
+            <div class="logo">Gustavo Torres</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#sobre-mi">Sobre Mí</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container">
+            <div class="hero-content fade-in">
+                <h1>Integro Inteligencia Artificial en tu Negocio sin Complicaciones Técnicas</h1>
+                <p>Consultor en IA especializado en emprendedores. Escucho cómo trabajas hoy y diseño la manera en que IA puede optimizar cada paso de tu proceso.</p>
+                <div class="hero-ctas">
+                    <a href="#contacto" class="btn btn-primary">Agenda tu Llamada de Diagnóstico</a>
+                    <a href="#recursos" class="btn btn-secondary">Descarga Recursos Gratuitos</a>
+                </div>
+            </div>
+            <div class="hero-image fade-in">
+                <div class="hero-image-placeholder">🚀</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Barra de Confianza -->
+    <div class="trust-bar">
+        <p>Han confiado en mí:</p>
+        <div class="clients">
+            <span class="client-badge">Academia de IA</span>
+            <span class="client-badge">Warp</span>
+            <span class="client-badge">Emprendedores Digitales</span>
+            <span class="client-badge">Consultores Independientes</span>
+        </div>
+    </div>
+
+    <!-- Problema/Solución -->
+    <section class="problem-solution">
+        <div class="container">
+            <h2 class="section-title">La IA No Se Trata Solo de Usar Herramientas</h2>
+            <div class="content">
+                <div>
+                    <h3>El Problema</h3>
+                    <p>Muchos emprendedores están usando herramientas de IA, pero no tienen una estrategia clara para que funcione en su sistema.</p>
+                    <p><strong>El resultado:</strong> frustración, tiempo perdido y oportunidades desperdiciadas.</p>
+                </div>
+                <div class="highlight-box">
+                    <h3>Lo Que Hago Diferente</h3>
+                    <p>No te enseño a usar más herramientas. Te ayudo a mapear tu operación actual y diseñar exactamente cómo la IA puede:</p>
+                    <ul style="margin-left: 1.5rem; margin-top: 1rem;">
+                        <li>✅ Acelerar tus resultados</li>
+                        <li>✅ Mejorar tus ventas</li>
+                        <li>✅ Optimizar tus procesos</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sobre Mí -->
+    <section class="about" id="sobre-mi">
+        <div class="container">
+            <h2 class="section-title">Hola, Soy Gustavo Torres</h2>
+            <div class="content">
+                <div class="about-image">GT</div>
+                <div class="about-text">
+                    <h3>Consultor en IA y Estrategia Digital</h3>
+                    <p>Soy consultor en integración de IA y apasionado por ayudar a emprendedores a evolucionar digitalmente.</p>
+                    <p>Durante años he trabajado con emprendedores y dueños de negocio en estrategia digital, lanzamientos, automatización y transformación de negocios. Hoy me especializo en algo que descubrí que hace la verdadera diferencia: <strong>no solo usar IA, sino integrarla estratégicamente.</strong></p>
+                    <p><strong>Mi enfoque es simple:</strong></p>
+                    <ol style="margin-left: 1.5rem;">
+                        <li>Escucho cómo trabajas hoy</li>
+                        <li>Encuentro las oportunidades reales con IA</li>
+                        <li>Diseño la estrategia personalizada para tu negocio</li>
+                        <li>Te acompaño en la implementación</li>
+                    </ol>
+                    <div class="mission-box">
+                        <p><strong>Mi misión:</strong> Que la IA sea tu aliada estratégica, no solo una herramienta más.</p>
+                        <p style="margin-top: 1rem;"><strong>Lo que me inspira:</strong> Soy un enamorado del amor, de la mujer emprendedora, la mamá empresaria. Las admiro profundamente y me inspira escuchar sus retos para poder ser quien las ayude a alcanzar sus metas.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="services" id="servicios">
+        <div class="container">
+            <h2 class="section-title">Cómo Puedo Ayudarte</h2>
+            <p class="section-subtitle">Servicios diseñados para emprendedores que quieren resultados reales con IA</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧠</div>
+                    <h3>Consultoría en Integración Personalizada de IA</h3>
+                    <p>Escucho cómo trabajas hoy y diseño la manera en que IA puede optimizar cada paso de tu proceso.</p>
+                    <div class="service-meta">
+                        <span class="service-tag">Paquetes por sesiones</span>
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Ideal para:</strong> Emprendedores que quieren integrar IA estratégicamente en ventas, marketing y operaciones.</p>
+                    <a href="#contacto" class="btn btn-primary" style="margin-top: 1.5rem;">Quiero integrar IA</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Acompañamiento en la Transición de Colaborador a Emprendedor</h3>
+                    <p>Construyes la dualidad profesionista-emprendedor: fortalecemos tu mente, desbloqueas miedos y comprendes el detrás de cámaras de un negocio digital.</p>
+                    <div class="service-meta">
+                        <span class="service-tag">Mentoría 1 a 1</span>
+                        <span class="service-tag">2-3 meses</span>
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Ideal para:</strong> Profesionistas que quieren lanzar su propio negocio.</p>
+                    <a href="#contacto" class="btn btn-primary" style="margin-top: 1.5rem;">Quiero hacer mi transición</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">💻</div>
+                    <h3>Ecosistemas Digitales con IA</h3>
+                    <p>Creación completa de sitios web, funnels automatizados y experiencias de usuario potenciadas con inteligencia artificial.</p>
+                    <div class="service-meta">
+                        <span class="service-tag">Proyecto completo</span>
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Ideal para:</strong> Emprendedores que necesitan digitalizar su venta presencial.</p>
+                    <a href="#contacto" class="btn btn-primary" style="margin-top: 1.5rem;">Quiero mi ecosistema</a>
+                </div>
+
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Consultoría en Lanzamientos con IA</h3>
+                    <p>Automatización y estrategia para lanzamientos que convierten. Acompañamiento completo o asesoría puntual.</p>
+                    <div class="service-meta">
+                        <span class="service-tag">Flexible</span>
+                    </div>
+                    <p style="margin-top: 1rem;"><strong>Ideal para:</strong> Emprendedores preparando un lanzamiento o academias online.</p>
+                    <a href="#contacto" class="btn btn-primary" style="margin-top: 1.5rem;">Quiero optimizar mi lanzamiento</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonials" id="testimonios">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen Quienes Han Trabajado Conmigo</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"He visto tus publicaciones en redes sociales y veo que tú tienes algo que yo necesito. Agradezco haberte enviado ese mensaje para ponernos en contacto. Me estás entendiendo perfecto, esto no lo hablo con cualquiera."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LR</div>
+                        <div class="author-info">
+                            <h4>Luis Rosas</h4>
+                            <p>Acompañamiento en Transición</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Me entiendes perfecto con las ideas que tengo, le das orden sin que yo necesite ser especialista o entender este esquema técnico. Te cuento lo que busco y tú lo traduces de una manera que es justo lo que necesito. Me estás ayudando mucho a crear mi ecosistema digital para captar leads."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h4>Ana Pao</h4>
+                            <p>Estrategia Digital</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Me gustó mucho mi sitio web, me ayudaste a llevar lo que vendo uno a uno de forma presencial a lo digital con un funnel de venta y un diseño que me gustó."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AA</div>
+                        <div class="author-info">
+                            <h4>Aida Aguilera</h4>
+                            <p>Ecosistema Digital</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Me encanta cómo hablas de los proyectos, te entiendo perfecto y no es nada estresante. Me gusta cómo me haces sentir, sin estrés y es profesional tu comunicación. Gracias."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">D</div>
+                        <div class="author-info">
+                            <h4>Dany</h4>
+                            <p>Presencia Digital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog -->
+    <section class="blog" id="blog">
+        <div class="container">
+            <h2 class="section-title">Aprende Sobre IA y Estrategia Digital</h2>
+            <p class="section-subtitle">Comparto contenido sobre inteligencia artificial aplicada, estrategia de negocio y mentalidad emprendedora. Todo en un lenguaje humano, sin tecnicismos.</p>
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <div class="blog-image">📝</div>
+                    <div class="blog-content">
+                        <h3>Artículo destacado 1</h3>
+                        <p>Aprende cómo integrar IA en tu negocio sin ser técnico...</p>
+                        <p class="blog-date">Fecha reciente</p>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">💡</div>
+                    <div class="blog-content">
+                        <h3>Artículo destacado 2</h3>
+                        <p>Estrategias para emprendedores que quieren evolucionar...</p>
+                        <p class="blog-date">Fecha reciente</p>
+                    </div>
+                </div>
+                <div class="blog-card">
+                    <div class="blog-image">🎯</div>
+                    <div class="blog-content">
+                        <h3>Artículo destacado 3</h3>
+                        <p>Mentalidad emprendedora y transformación digital...</p>
+                        <p class="blog-date">Fecha reciente</p>
+                    </div>
+                </div>
+            </div>
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="#" class="btn btn-primary">Lee todos mis artículos en Substack</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recursos -->
+    <section class="resources" id="recursos">
+        <div class="container">
+            <h2 class="section-title">Recursos Gratuitos para Empezar con IA</h2>
+            <p class="section-subtitle">Descarga guías, templates y frameworks que te ayudarán a integrar IA en tu negocio</p>
+            <div class="resources-grid">
+                <div class="resource-card">
+                    <div class="resource-icon">📄</div>
+                    <h3>5 Formas de Usar IA en tu Negocio HOY</h3>
+                    <p>PDF descargable con estrategias prácticas</p>
+                    <a href="#contacto" class="btn btn-secondary">Descargar</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">📋</div>
+                    <h3>Template: Mapea tu Operación para IA</h3>
+                    <p>Plantilla editable para analizar tu negocio</p>
+                    <a href="#contacto" class="btn btn-secondary">Descargar</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">✅</div>
+                    <h3>Checklist: ¿Tu Negocio Está Listo para IA?</h3>
+                    <p>PDF interactivo de evaluación</p>
+                    <a href="#contacto" class="btn btn-secondary">Descargar</a>
+                </div>
+                <div class="resource-card">
+                    <div class="resource-icon">🎥</div>
+                    <h3>Video: 3 Errores Comunes al Usar IA</h3>
+                    <p>Video corto de 10 minutos</p>
+                    <a href="#contacto" class="btn btn-secondary">Ver ahora</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tienda -->
+    <section class="shop" id="tienda">
+        <div class="container">
+            <h2 class="section-title">Cursos y Productos Digitales</h2>
+            <div class="coming-soon">
+                <h3>🚀 Próximamente</h3>
+                <p>Estoy preparando cursos y herramientas increíbles para que puedas integrar IA en tu negocio a tu ritmo.</p>
+                <p><strong>¿Qué viene?</strong></p>
+                <ul style="list-style: none; margin: 1.5rem 0;">
+                    <li>✨ Curso: "Integración de IA para Emprendedores"</li>
+                    <li>✨ Taller: "Tu Primer Ecosistema Digital con IA"</li>
+                    <li>✨ Membresía: "Comunidad IA para Negocios"</li>
+                </ul>
+                <p>Únete a la lista de espera y sé el primero en enterarte cuando lance:</p>
+                <form class="waitlist-form">
+                    <input type="email" placeholder="Tu mejor email" required>
+                    <button type="submit" class="btn btn-primary">Únirme</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacto -->
+    <section class="contact" id="contacto">
+        <div class="container">
+            <h2 class="section-title">Trabajemos Juntos</h2>
+            <p class="section-subtitle">Elige la forma que más te acomode para ponernos en contacto</p>
+            <div class="contact-grid">
+                <a href="#" class="contact-option">
+                    <div class="contact-icon">📅</div>
+                    <h3>Llamada de Diagnóstico</h3>
+                    <p>Agenda 30 minutos gratuitos</p>
+                </a>
+                <a href="#" class="contact-option">
+                    <div class="contact-icon">💬</div>
+                    <h3>WhatsApp</h3>
+                    <p>Escríbeme directamente</p>
+                </a>
+                <a href="#" class="contact-option">
+                    <div class="contact-icon">✉️</div>
+                    <h3>Email</h3>
+                    <p>tu@email.com</p>
+                </a>
+                <a href="#" class="contact-option">
+                    <div class="contact-icon">📝</div>
+                    <h3>Formulario</h3>
+                    <p>Cuéntame tu proyecto</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Navegación</h4>
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#sobre-mi">Sobre Mí</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#recursos">Recursos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Servicios</h4>
+                <ul>
+                    <li><a href="#servicios">Consultoría en IA</a></li>
+                    <li><a href="#servicios">Mentoría Emprendedora</a></li>
+                    <li><a href="#servicios">Ecosistemas Digitales</a></li>
+                    <li><a href="#servicios">Lanzamientos con IA</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Recursos</h4>
+                <ul>
+                    <li><a href="#blog">Blog (Substack)</a></li>
+                    <li><a href="#recursos">Recursos Gratuitos</a></li>
+                    <li><a href="#tienda">Cursos (Próximamente)</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Conéctate</h4>
+                <p style="margin-bottom: 1rem; color: #ccc;">📍 México</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon">📱</a>
+                    <a href="#" class="social-icon">💼</a>
+                    <a href="#" class="social-icon">🎵</a>
+                    <a href="#" class="social-icon">🐦</a>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2024 Gustavo Torres - Consultor en IA | Todos los derechos reservados</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll para navegación
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación fade-in al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observar todas las cards y secciones
+        document.querySelectorAll('.service-card, .testimonial-card, .blog-card, .resource-card').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Formulario de waitlist
+        document.querySelector('.waitlist-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const email = this.querySelector('input[type="email"]').value;
+            alert('¡Gracias! Te notificaremos cuando los productos estén listos: ' + email);
+            this.reset();
+        });
+    </script>
+</body>
+</html>
