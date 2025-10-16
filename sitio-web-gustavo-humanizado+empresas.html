@@ -1,0 +1,1169 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gustavo Torres | Hagamos que la IA trabaje para ti (no al revés)</title>
+    <meta name="description" content="Te ayudo a integrar IA en tu negocio de una forma que tenga sentido para TI. Sin rollo técnico, con resultados reales.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --morado: #7B68EE;
+            --turquesa: #00CED1;
+            --blanco: #FFFFFF;
+            --rosa: #FF69B4;
+            --verde: #32CD32;
+            --gris-oscuro: #2a2a2a;
+            --gris-claro: #f8f9fa;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.7;
+            color: var(--gris-oscuro);
+            overflow-x: hidden;
+        }
+        
+        /* Navegación */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        
+        nav .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--gris-oscuro);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: var(--morado);
+        }
+        
+        /* Botones */
+        .btn {
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: inline-block;
+            cursor: pointer;
+            border: none;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            color: var(--blanco);
+            box-shadow: 0 5px 20px rgba(123, 104, 238, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(123, 104, 238, 0.4);
+        }
+        
+        .btn-secondary {
+            background: var(--blanco);
+            color: var(--morado);
+            border: 2px solid var(--morado);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--morado);
+            color: var(--blanco);
+            transform: translateY(-3px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            min-height: 95vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(135deg, rgba(123, 104, 238, 0.08), rgba(0, 206, 209, 0.08));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '✨';
+            position: absolute;
+            font-size: 10rem;
+            opacity: 0.1;
+            top: 10%;
+            right: 10%;
+            animation: float 6s ease-in-out infinite;
+        }
+        
+        .hero::after {
+            content: '🚀';
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.1;
+            bottom: 15%;
+            left: 5%;
+            animation: float 8s ease-in-out infinite;
+        }
+        
+        .hero .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa), var(--rosa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 800;
+        }
+        
+        .hero .subtitle {
+            font-size: 1.5rem;
+            color: #555;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+        
+        .hero .description {
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .hero-ctas {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 3rem;
+        }
+        
+        .hero-note {
+            font-size: 0.95rem;
+            color: #999;
+            font-style: italic;
+        }
+        
+        /* Secciones */
+        section {
+            padding: 5rem 2rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa), var(--rosa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.3rem;
+            margin-bottom: 4rem;
+            font-weight: 400;
+        }
+        
+        /* Problema Real */
+        .problema-real {
+            background: linear-gradient(135deg, #fff5f8, #f0f9ff);
+        }
+        
+        .problema-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        .pregunta-grande {
+            font-size: 2rem;
+            color: var(--morado);
+            text-align: center;
+            margin-bottom: 2rem;
+            font-weight: 600;
+            line-height: 1.4;
+        }
+        
+        .problema-list {
+            background: var(--blanco);
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            margin-bottom: 2rem;
+        }
+        
+        .problema-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: rgba(123, 104, 238, 0.03);
+            border-radius: 12px;
+        }
+        
+        .problema-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .problema-emoji {
+            font-size: 2rem;
+            flex-shrink: 0;
+        }
+        
+        .problema-text {
+            flex: 1;
+        }
+        
+        .problema-text strong {
+            color: var(--morado);
+            display: block;
+            margin-bottom: 0.3rem;
+        }
+        
+        .realidad-box {
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            color: var(--blanco);
+            padding: 2rem;
+            border-radius: 20px;
+            text-align: center;
+            font-size: 1.3rem;
+            font-weight: 600;
+            box-shadow: 0 10px 30px rgba(123, 104, 238, 0.3);
+        }
+        
+        /* Mi Historia */
+        .mi-historia {
+            background: var(--gris-claro);
+        }
+        
+        .historia-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .historia-image {
+            width: 100%;
+            height: 450px;
+            background: linear-gradient(135deg, var(--turquesa), var(--verde), var(--rosa));
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 5rem;
+            box-shadow: 0 20px 50px rgba(0, 206, 209, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .historia-image::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shine 4s infinite;
+        }
+        
+        .historia-text h3 {
+            font-size: 2rem;
+            color: var(--morado);
+            margin-bottom: 1.5rem;
+        }
+        
+        .historia-text p {
+            font-size: 1.15rem;
+            color: #555;
+            margin-bottom: 1.3rem;
+            line-height: 1.8;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, rgba(123, 104, 238, 0.1), rgba(0, 206, 209, 0.1));
+            padding: 1.8rem;
+            border-radius: 15px;
+            border-left: 5px solid var(--rosa);
+            margin: 2rem 0;
+            font-style: italic;
+            color: #444;
+        }
+        
+        .momento-clave {
+            background: var(--blanco);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            margin-top: 2rem;
+        }
+        
+        .momento-clave h4 {
+            color: var(--turquesa);
+            margin-bottom: 1rem;
+            font-size: 1.3rem;
+        }
+        
+        /* Cómo Trabajo */
+        .como-trabajo {
+            background: linear-gradient(135deg, #fff, #f8f9ff);
+        }
+        
+        .proceso-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .proceso-card {
+            background: var(--blanco);
+            padding: 2.5rem;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            position: relative;
+        }
+        
+        .proceso-card::before {
+            content: attr(data-step);
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            color: var(--blanco);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            box-shadow: 0 5px 15px rgba(123, 104, 238, 0.4);
+        }
+        
+        .proceso-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(123, 104, 238, 0.2);
+        }
+        
+        .proceso-emoji {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .proceso-card h3 {
+            color: var(--morado);
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        
+        .proceso-card p {
+            color: #666;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        /* Servicios */
+        .servicios {
+            background: var(--gris-claro);
+        }
+        
+        .servicios-intro {
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .servicios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .servicio-card {
+            background: var(--blanco);
+            padding: 3rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            border-top: 5px solid transparent;
+        }
+        
+        .servicio-card:nth-child(1) { border-top-color: var(--morado); }
+        .servicio-card:nth-child(2) { border-top-color: var(--turquesa); }
+        .servicio-card:nth-child(3) { border-top-color: var(--rosa); }
+        .servicio-card:nth-child(4) { border-top-color: var(--verde); }
+        
+        .servicio-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.15);
+        }
+        
+        .servicio-emoji {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+        
+        .servicio-card h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+            color: var(--morado);
+        }
+        
+        .servicio-card .servicio-desc {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .servicio-ideal {
+            background: rgba(123, 104, 238, 0.05);
+            padding: 1rem;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+            color: #666;
+        }
+        
+        .servicio-ideal strong {
+            color: var(--morado);
+        }
+        
+        /* Testimonios */
+        .testimonios {
+            background: linear-gradient(135deg, #fff, #fffaf5);
+        }
+        
+        .testimonios-intro {
+            max-width: 700px;
+            margin: 0 auto 4rem;
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+        }
+        
+        .testimonios-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .testimonial-card {
+            background: var(--blanco);
+            padding: 2.5rem;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.08);
+            position: relative;
+            transition: all 0.3s;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+        }
+        
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: 25px;
+            font-size: 7rem;
+            background: linear-gradient(135deg, var(--turquesa), var(--rosa));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.3;
+            font-family: Georgia, serif;
+        }
+        
+        .testimonial-text {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .author-avatar {
+            width: 55px;
+            height: 55px;
+            background: linear-gradient(135deg, var(--rosa), var(--verde), var(--morado));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-weight: 700;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(255, 105, 180, 0.3);
+        }
+        
+        .author-info h4 {
+            color: var(--morado);
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+        
+        .author-info p {
+            color: #999;
+            font-size: 0.9rem;
+        }
+        
+        /* CTA Final */
+        .cta-final {
+            background: linear-gradient(135deg, var(--morado), var(--turquesa));
+            color: var(--blanco);
+            text-align: center;
+            padding: 5rem 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cta-final::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            top: -100px;
+            right: -100px;
+            border-radius: 50%;
+        }
+        
+        .cta-final h2 {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-final p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-final .btn {
+            background: var(--blanco);
+            color: var(--morado);
+            font-size: 1.2rem;
+            padding: 1.2rem 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .cta-final .btn:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+        
+        /* Footer */
+        footer {
+            background: var(--gris-oscuro);
+            color: var(--blanco);
+            padding: 3rem 2rem 1.5rem;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+        
+        .footer-content p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .social-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--blanco);
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background: var(--turquesa);
+            transform: translateY(-5px) rotate(10deg);
+        }
+        
+        .copyright {
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+        }
+        
+        /* Animaciones */
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+            .hero .subtitle { font-size: 1.2rem; }
+            .hero .description { font-size: 1.05rem; }
+            .historia-content { grid-template-columns: 1fr; }
+            .section-title { font-size: 2rem; }
+            .pregunta-grande { font-size: 1.5rem; }
+            .hero-ctas { flex-direction: column; }
+            .btn { width: 100%; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navegación -->
+    <nav>
+        <div class="container">
+            <div class="logo">Gustavo Torres</div>
+            <ul class="nav-links">
+                <li><a href="#inicio">Inicio</a></li>
+                <li><a href="#historia">Mi Historia</a></li>
+                <li><a href="#como-trabajo">Cómo Trabajo</a></li>
+                <li><a href="#servicios">Servicios</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
+                <li><a href="#empresas" style="opacity: 0.7;">Empresas</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="container fade-in">
+            <h1>Hagamos que la IA trabaje para ti<br>(no al revés)</h1>
+            <p class="subtitle">Porque tener 10 herramientas de IA no sirve de nada si no se conectan entre sí</p>
+            <p class="description">Te ayudo a integrar inteligencia artificial en tu negocio de una forma que tenga sentido para TI. Sin rollo técnico, sin teorías complicadas. Solo estrategia clara y resultados reales.</p>
+            <div class="hero-ctas">
+                <a href="#" class="btn btn-primary">Hablemos de tu negocio (es gratis)</a>
+                <a href="#como-trabajo" class="btn btn-secondary">Quiero ver cómo trabajas</a>
+            </div>
+            <p class="hero-note">💬 Respondo personalmente. No bots, no asistentes.</p>
+        </div>
+    </section>
+
+    <!-- Problema Real -->
+    <section class="problema-real">
+        <div class="container">
+            <div class="problema-content">
+                <p class="pregunta-grande">¿Te suena familiar esto?</p>
+                
+                <div class="problema-list">
+                    <div class="problema-item">
+                        <span class="problema-emoji">😵</span>
+                        <div class="problema-text">
+                            <strong>Tienes ChatGPT, Canva, herramientas para redes...</strong>
+                            Pero cada cosa está en su mundo. Tienes que copiar y pegar todo manual. ¿Dónde está la "magia" de la IA?
+                        </div>
+                    </div>
+                    
+                    <div class="problema-item">
+                        <span class="problema-emoji">⏰</span>
+                        <div class="problema-text">
+                            <strong>Pasas horas haciendo cosas que SABES que podrías automatizar</strong>
+                            Responder los mismos DMs, crear el mismo tipo de contenido, mandar los mismos emails... pero no sabes cómo conectar todo.
+                        </div>
+                    </div>
+                    
+                    <div class="problema-item">
+                        <span class="problema-emoji">🤔</span>
+                        <div class="problema-text">
+                            <strong>"¿Y ahora qué herramienta uso para esto?"</strong>
+                            Te pierdes en tutoriales de YouTube. Cada gurú recomienda algo diferente. Al final usas lo básico porque es lo único que entiendes.
+                        </div>
+                    </div>
+                    
+                    <div class="problema-item">
+                        <span class="problema-emoji">💸</span>
+                        <div class="problema-text">
+                            <strong>Tu negocio no crece más rápido aunque "uses IA"</strong>
+                            Pensaste que la IA te daría superpoderes, pero sientes que solo tienes más herramientas sin un plan claro de cómo usarlas juntas.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="realidad-box">
+                    El problema no es que no sepas usar IA.<br>
+                    Es que nadie te ha ayudado a crear UN SISTEMA.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mi Historia -->
+    <section class="mi-historia" id="historia">
+        <div class="container">
+            <h2 class="section-title">Hola 👋 Soy Gustavo</h2>
+            <p class="section-subtitle">Y sí, yo también pasé por esto</p>
+            
+            <div class="historia-content">
+                <div class="historia-image fade-in">GT</div>
+                
+                <div class="historia-text">
+                    <h3>De "hacer de todo digital" a encontrar mi verdadero superpoder</h3>
+                    
+                    <p>Durante años fui ese amigo al que le pedían ayuda con "cosas de internet". Sitios web, redes, estrategias, lanzamientos... Si tenía que ver con lo digital, yo sabía un poco de todo.</p>
+                    
+                    <p>Pero la verdad es que <strong>me sentía como todólogo sin especialidad</strong>. Hasta que un día trabajando con una cliente (se llama Amorita), le mostré cómo la IA podría acelerar su proceso de crear estrategias.</p>
+                    
+                    <div class="quote-box">
+                        "Su cara cambió completamente. Pasó de frustración a emoción en 2 segundos. Y yo pensé: 'Esto es. Aquí está mi valor real.'"
+                    </div>
+                    
+                    <p>No era enseñarle a usar ChatGPT. Era <strong>entender primero cómo ella trabajaba</strong>, y DESPUÉS mostrarle cómo la IA podía integrarse en su flujo.</p>
+                    
+                    <p>Cuando otro cliente (Luis) me dijo: <em>"Me estás entendiendo perfecto, esto no lo hablo con cualquiera"</em>, confirmé lo que había descubierto:</p>
+                    
+                    <div class="momento-clave">
+                        <h4>💡 Mi verdadero superpoder no es la IA</h4>
+                        <p>Es <strong>escucharte, entender tu negocio, y traducir la tecnología en soluciones que tengan sentido para ti.</strong></p>
+                        <p style="margin-top: 1rem;">Porque la IA sin estrategia es solo otra herramienta más que te frustra.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cómo Trabajo -->
+    <section class="como-trabajo" id="como-trabajo">
+        <div class="container">
+            <h2 class="section-title">Cómo Trabajo Contigo</h2>
+            <p class="section-subtitle">Simple, sin rollo, enfocado en resultados</p>
+            
+            <div class="proceso-grid">
+                <div class="proceso-card" data-step="1">
+                    <span class="proceso-emoji">👂</span>
+                    <h3>Te Escucho de Verdad</h3>
+                    <p>No empiezo recomendándote herramientas. Primero quiero saber: ¿Cómo trabajas HOY? ¿Qué te frustra? ¿Qué sueñas lograr?</p>
+                </div>
+                
+                <div class="proceso-card" data-step="2">
+                    <span class="proceso-emoji">🔍</span>
+                    <h3>Encuentro los "Hoyos Negros"</h3>
+                    <p>Esas partes de tu negocio donde pierdes tiempo, energía o dinero. Ahí es donde la IA puede darte superpoderes reales.</p>
+                </div>
+                
+                <div class="proceso-card" data-step="3">
+                    <span class="proceso-emoji">🗺️</span>
+                    <h3>Diseño TU Sistema</h3>
+                    <p>No copias genéricas de internet. Una estrategia personalizada que conecta las piezas de TU negocio con IA que tiene sentido para ti.</p>
+                </div>
+                
+                <div class="proceso-card" data-step="4">
+                    <span class="proceso-emoji">🤝</span>
+                    <h3>Te Acompaño Hasta que Funcione</h3>
+                    <p>No te dejo solo con un PDF. Estoy contigo hasta que lo domines y tu sistema trabaje para ti (no al revés).</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios -->
+    <section class="servicios" id="servicios">
+        <div class="container">
+            <h2 class="section-title">¿En Qué Te Puedo Ayudar?</h2>
+            <p class="servicios-intro">Trabajo de diferentes formas según lo que necesites. Desde sesiones específicas hasta proyectos completos. Tú eliges.</p>
+            
+            <div class="servicios-grid">
+                <div class="servicio-card">
+                    <span class="servicio-emoji">🧠</span>
+                    <h3>Te Ayudo a Integrar IA en Tu Negocio</h3>
+                    <p class="servicio-desc">Hacemos sesiones donde vemos cómo trabajas hoy, y diseñamos juntos cómo la IA puede optimizar cada paso. Sin teoría, con acción.</p>
+                    <div class="servicio-ideal">
+                        <strong>Perfecto si:</strong> Ya usas algunas herramientas de IA pero sientes que no se conectan. Quieres un plan claro, no más tutoriales.
+                    </div>
+                    <a href="#" class="btn btn-primary">Quiero esto</a>
+                </div>
+
+                <div class="servicio-card">
+                    <span class="servicio-emoji">🚀</span>
+                    <h3>Te Acompaño en Tu Salto a Emprendedor</h3>
+                    <p class="servicio-desc">Si vienes del mundo corporativo o eres profesionista y quieres lanzar tu negocio, trabajamos juntos 2-3 meses en mentalidad, estrategia y estructura digital.</p>
+                    <div class="servicio-ideal">
+                        <strong>Perfecto si:</strong> Sabes que quieres emprender pero no sabes por dónde empezar. Necesitas claridad, no solo más información.
+                    </div>
+                    <a href="#" class="btn btn-primary">Quiero esto</a>
+                </div>
+
+                <div class="servicio-card">
+                    <span class="servicio-emoji">💻</span>
+                    <h3>Creo Tu Ecosistema Digital Completo</h3>
+                    <p class="servicio-desc">Tu sitio web, tus funnels, tu automatización. Todo conectado con IA. Para que captes leads y vendas aunque estés durmiendo.</p>
+                    <div class="servicio-ideal">
+                        <strong>Perfecto si:</strong> Vendes uno a uno y quieres digitalizar tu negocio. O ya tienes presencia digital pero está desconectada.
+                    </div>
+                    <a href="#" class="btn btn-primary">Quiero esto</a>
+                </div>
+
+                <div class="servicio-card">
+                    <span class="servicio-emoji">📊</span>
+                    <h3>Optimizo Tu Lanzamiento con IA</h3>
+                    <p class="servicio-desc">Si estás preparando un lanzamiento, te ayudo a automatizar la experiencia del usuario para que conviertas más sin trabajar más.</p>
+                    <div class="servicio-ideal">
+                        <strong>Perfecto si:</strong> Tienes un curso, producto o servicio que quieres lanzar. Necesitas que la tecnología trabaje para ti.
+                    </div>
+                    <a href="#" class="btn btn-primary">Quiero esto</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="testimonios" id="testimonios">
+        <div class="container">
+            <h2 class="section-title">Lo Que Dicen las Personas que Han Trabajado Conmigo</h2>
+            <p class="testimonios-intro">No me creas a mí. Escucha lo que dicen ellos.</p>
+            
+            <div class="testimonios-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"He visto tus publicaciones en redes sociales y veo que tú tienes algo que yo necesito. Agradezco haberte enviado ese mensaje para ponernos en contacto. Me estás entendiendo perfecto, esto no lo hablo con cualquiera."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LR</div>
+                        <div class="author-info">
+                            <h4>Luis Rosas</h4>
+                            <p>Transición a emprendedor</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Me entiendes perfecto con las ideas que tengo, le das orden sin que yo necesite ser especialista o entender este esquema técnico. Te cuento lo que busco y tú lo traduces de una manera que es justo lo que necesito. Me estás ayudando mucho a crear mi ecosistema digital para captar leads."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AP</div>
+                        <div class="author-info">
+                            <h4>Ana Pao</h4>
+                            <p>Ecosistema digital</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Me gustó mucho mi sitio web, me ayudaste a llevar lo que vendo uno a uno de forma presencial a lo digital con un funnel de venta y un diseño que me gustó."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AA</div>
+                        <div class="author-info">
+                            <h4>Aida Aguilera</h4>
+                            <p>Digitalización de negocio</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Me encanta cómo hablas de los proyectos, te entiendo perfecto y no es nada estresante. Me gusta cómo me haces sentir, sin estrés y es profesional tu comunicación. Gracias."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">D</div>
+                        <div class="author-info">
+                            <h4>Dany</h4>
+                            <p>Presencia digital</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Separador / Transición -->
+    <div style="background: linear-gradient(to bottom, #fffaf5, #f0f4ff); padding: 3rem 0;">
+        <div style="max-width: 800px; margin: 0 auto; text-align: center; padding: 0 2rem;">
+            <div style="width: 100px; height: 3px; background: linear-gradient(90deg, var(--morado), var(--turquesa)); margin: 0 auto 2rem;"></div>
+            <p style="font-size: 1.1rem; color: #666; font-style: italic;">
+                La mayoría de mis clientes son emprendedores individuales, pero también trabajo con equipos y organizaciones que buscan integrar IA de forma estratégica.
+            </p>
+            <div style="width: 100px; height: 3px; background: linear-gradient(90deg, var(--turquesa), var(--morado)); margin: 2rem auto 0;"></div>
+        </div>
+    </div>
+
+    <!-- Sección Corporativa -->
+    <section class="soluciones-empresas" id="empresas" style="background: linear-gradient(135deg, #f8f9fa, #f0f4ff); padding: 5rem 2rem;">
+        <div class="container">
+            <div style="text-align: center; max-width: 900px; margin: 0 auto 4rem;">
+                <h2 style="font-size: 2.5rem; color: var(--morado); margin-bottom: 1rem; font-weight: 700;">Soluciones de IA para Equipos y Organizaciones</h2>
+                <p style="font-size: 1.2rem; color: #555; line-height: 1.8;">
+                    Si lidera un equipo o empresa y busca integrar inteligencia artificial de forma estratégica, ofrezco soluciones diseñadas para organizaciones que necesitan resultados medibles y escalables.
+                </p>
+                <p style="font-size: 1.1rem; color: #666; margin-top: 1rem; font-style: italic;">
+                    Mismo enfoque (escuchar primero, diseñar después), adaptado a las necesidades de equipos y métricas de negocio.
+                </p>
+            </div>
+
+            <!-- Servicios Corporativos -->
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 4rem;">
+                
+                <!-- Servicio 1 -->
+                <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid var(--morado);">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--morado), var(--turquesa)); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2rem;">🎯</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; color: var(--morado); margin-bottom: 1rem;">Consultoría Estratégica en IA</h3>
+                    <p style="color: #555; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Análisis completo de su operación actual, identificación de oportunidades de optimización con IA, y diseño de estrategia de integración personalizada con roadmap de implementación.
+                    </p>
+                    <div style="background: rgba(123, 104, 238, 0.05); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <p style="font-size: 0.95rem; color: #666;"><strong style="color: var(--morado);">Incluye:</strong> Mapeo de procesos, análisis de herramientas actuales, diseño de sistema integrado, KPIs y métricas de éxito.</p>
+                    </div>
+                    <a href="#" style="display: inline-block; padding: 0.8rem 2rem; background: var(--morado); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s;">Solicitar consulta</a>
+                </div>
+
+                <!-- Servicio 2 -->
+                <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid var(--turquesa);">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--turquesa), var(--verde)); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2rem;">👥</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; color: var(--morado); margin-bottom: 1rem;">Capacitación y Talleres</h3>
+                    <p style="color: #555; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Programas de formación para equipos en integración práctica de IA. Desde fundamentos hasta implementación avanzada, adaptado al nivel y necesidades de su organización.
+                    </p>
+                    <div style="background: rgba(0, 206, 209, 0.05); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <p style="font-size: 0.95rem; color: #666;"><strong style="color: var(--turquesa);">Formato:</strong> Talleres presenciales o virtuales, sesiones prácticas, documentación y soporte post-capacitación.</p>
+                    </div>
+                    <a href="#" style="display: inline-block; padding: 0.8rem 2rem; background: var(--turquesa); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s;">Solicitar información</a>
+                </div>
+
+                <!-- Servicio 3 -->
+                <div style="background: white; padding: 2.5rem; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); border-top: 4px solid var(--rosa);">
+                    <div style="width: 60px; height: 60px; background: linear-gradient(135deg, var(--rosa), var(--morado)); border-radius: 15px; display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem;">
+                        <span style="font-size: 2rem;">⚙️</span>
+                    </div>
+                    <h3 style="font-size: 1.5rem; color: var(--morado); margin-bottom: 1rem;">Implementación y Soporte</h3>
+                    <p style="color: #555; font-size: 1.05rem; line-height: 1.7; margin-bottom: 1.5rem;">
+                        Acompañamiento completo en la implementación de sistemas de IA en su organización. Desde la configuración inicial hasta la optimización continua y soporte técnico.
+                    </p>
+                    <div style="background: rgba(255, 105, 180, 0.05); padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;">
+                        <p style="font-size: 0.95rem; color: #666;"><strong style="color: var(--rosa);">Modalidad:</strong> Proyectos completos o soporte mensual. Incluye monitoreo, ajustes y reportes de resultados.</p>
+                    </div>
+                    <a href="#" style="display: inline-block; padding: 0.8rem 2rem; background: var(--rosa); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; transition: all 0.3s;">Iniciar proyecto</a>
+                </div>
+            </div>
+
+            <!-- Casos de Éxito Corporativos -->
+            <div style="background: white; padding: 3rem; border-radius: 25px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); margin-bottom: 3rem;">
+                <h3 style="font-size: 2rem; color: var(--morado); text-align: center; margin-bottom: 2.5rem;">Casos de Éxito con Organizaciones</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem;">
+                    <div style="padding: 1.5rem; background: rgba(123, 104, 238, 0.03); border-radius: 15px; border-left: 4px solid var(--morado);">
+                        <h4 style="color: var(--morado); margin-bottom: 0.5rem; font-size: 1.2rem;">Academia de IA</h4>
+                        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1rem;">Escuela de enseñanza de herramientas de IA</p>
+                        <p style="color: #555; line-height: 1.6;">Implementación de automatización en experiencia de usuarios durante lanzamiento de certificación como consultor en IA.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem; background: rgba(0, 206, 209, 0.03); border-radius: 15px; border-left: 4px solid var(--turquesa);">
+                        <h4 style="color: var(--turquesa); margin-bottom: 0.5rem; font-size: 1.2rem;">Warp</h4>
+                        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1rem;">Agencia de desarrollo web</p>
+                        <p style="color: #555; line-height: 1.6;">Mantenimiento de activos digitales y creación de sitios web optimizados con inteligencia artificial.</p>
+                    </div>
+                    
+                    <div style="padding: 1.5rem; background: rgba(255, 105, 180, 0.03); border-radius: 15px; border-left: 4px solid var(--rosa);">
+                        <h4 style="color: var(--rosa); margin-bottom: 0.5rem; font-size: 1.2rem;">Proyectos Corporativos</h4>
+                        <p style="color: #666; font-size: 0.95rem; margin-bottom: 1rem;">Diversos sectores</p>
+                        <p style="color: #555; line-height: 1.6;">Consultoría estratégica en lanzamientos digitales y automatización de procesos para equipos de trabajo.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Por Qué Trabajar Conmigo (Versión Corporativa) -->
+            <div style="background: linear-gradient(135deg, var(--morado), var(--turquesa)); padding: 3rem; border-radius: 25px; color: white; text-align: center;">
+                <h3 style="font-size: 1.8rem; margin-bottom: 1.5rem;">¿Por Qué Elegir Este Enfoque?</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; margin-top: 2rem;">
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🎯</div>
+                        <h4 style="margin-bottom: 0.5rem;">Personalizado</h4>
+                        <p style="opacity: 0.9; font-size: 0.95rem;">No vendemos soluciones genéricas. Diseñamos estrategias específicas para su organización.</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">📊</div>
+                        <h4 style="margin-bottom: 0.5rem;">Medible</h4>
+                        <p style="opacity: 0.9; font-size: 0.95rem;">Establecemos KPIs claros y métricas de éxito desde el inicio del proyecto.</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">🤝</div>
+                        <h4 style="margin-bottom: 0.5rem;">Acompañamiento</h4>
+                        <p style="opacity: 0.9; font-size: 0.95rem;">No entregamos documentos y nos vamos. Acompañamos hasta que el sistema funcione.</p>
+                    </div>
+                    <div>
+                        <div style="font-size: 2.5rem; margin-bottom: 0.5rem;">💡</div>
+                        <h4 style="margin-bottom: 0.5rem;">Práctico</h4>
+                        <p style="opacity: 0.9; font-size: 0.95rem;">Enfoque en implementación real, no solo teoría o presentaciones.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Corporativo -->
+            <div style="text-align: center; margin-top: 4rem;">
+                <h3 style="font-size: 2rem; color: var(--morado); margin-bottom: 1rem;">¿Listo para Integrar IA en su Organización?</h3>
+                <p style="font-size: 1.15rem; color: #666; margin-bottom: 2rem; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Agende una consulta inicial para conocer sus necesidades y explorar cómo podemos ayudar a su equipo.
+                </p>
+                <a href="#" style="display: inline-block; padding: 1.2rem 3rem; background: var(--morado); color: white; text-decoration: none; border-radius: 50px; font-weight: 600; font-size: 1.1rem; box-shadow: 0 10px 30px rgba(123, 104, 238, 0.3); transition: all 0.3s;">Solicitar Consulta Empresarial</a>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #999;">Respuesta en menos de 24 horas</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Final (Mantiene tono Versión B) -->
+    <section class="cta-final">
+        <div class="container">
+            <h2>¿Listo para que tu negocio trabaje para ti?</h2>
+            <p>Hablemos. Sin compromiso, sin presión. Solo una conversación honesta sobre tu negocio y cómo la IA puede ayudarte de verdad.</p>
+            <a href="#" class="btn">Agenda una llamada conmigo (30 min gratis)</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <p>Conectemos en redes sociales</p>
+            <div class="social-links">
+                <a href="#" class="social-icon">📱</a>
+                <a href="#" class="social-icon">💼</a>
+                <a href="#" class="social-icon">🎵</a>
+                <a href="#" class="social-icon">🐦</a>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>© 2024 Gustavo Torres | Hecho con ❤️ desde México</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">No prometo magia. Prometo estrategia que funciona.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Animación fade-in al hacer scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.servicio-card, .testimonial-card, .proceso-card, .problema-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
